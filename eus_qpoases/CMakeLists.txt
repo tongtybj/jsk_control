@@ -13,12 +13,14 @@ ExternalProject_Add(qpoases
   CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release
   BUILD_COMMAND make -j
   BUILD_IN_SOURCE 1
-  INSTALL_COMMAND sh -c "cp -r include/* ${PROJECT_SOURCE_DIR}/include/" && sh -c "rm -fr ${PROJECT_SOURCE_DIR}/include/qpOASES/.svn ${PROJECT_SOURCE_DIR}/include/qpOASES/extras/.svn" && cp libs/libqpOASES.so ${PROJECT_SOURCE_DIR}/lib/ && cp libs/libqpOASES.so.3.0 ${PROJECT_SOURCE_DIR}/lib/
+  INSTALL_COMMAND ""
   LOG_DOWNLOAD ON
   LOG_CONFIGURE ON
   LOG_BUILD ON
   )
-ExternalProject_Get_Property(qpoases source_dir)
+ExternalProject_Get_Property(qpoases SOURCE_DIR)
+include_directories(${SOURCE_DIR}/include)
+link_directories(${SOURCE_DIR}/libs)
 
 catkin_package(
  INCLUDE_DIRS include
